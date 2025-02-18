@@ -10,6 +10,9 @@ import org.example.users.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -37,6 +40,24 @@ public class UserServiceImpl implements UserService {
         }
         return emailExists;
     }
+
+    @Override
+    public List<UserDto> findAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private UserDto convertToDto(User user) {
+        return UserDto.builder()
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .secondName(user.getSecondName())
+                .role(user.getRole())
+                .build();
+    }
+
 
     private User buildUserFromDto(UserDto userDto) {
         return User.builder()

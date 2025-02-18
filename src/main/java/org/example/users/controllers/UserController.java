@@ -6,10 +6,7 @@ import org.example.users.exceptions.users.EmailAlreadyInUseException;
 import org.example.users.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -28,5 +25,10 @@ public class UserController {
         } catch (EmailAlreadyInUseException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", e.getMessage()));
         }
+    }
+
+    @GetMapping("/find-all-users")
+    public ResponseEntity<Object> findAllUsers() {
+        return ResponseEntity.ok().body(userService.findAllUsers());
     }
 }
