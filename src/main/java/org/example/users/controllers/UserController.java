@@ -34,6 +34,6 @@ public class UserController {
 
     @GetMapping("/test")
     public ResponseEntity<Object> test() {
-        return ResponseEntity.ok().body(Map.of("message", "Pipline successful"));
+        return ResponseEntity.ok().body(Map.of("message", "123 successful"));
     }
 }
