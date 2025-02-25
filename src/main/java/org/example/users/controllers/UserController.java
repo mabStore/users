@@ -31,4 +31,9 @@ public class UserController {
     public ResponseEntity<Object> findAllUsers() {
         return ResponseEntity.ok().body(userService.findAllUsers());
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<Object> test() {
+        return ResponseEntity.ok().body(Map.of("message", "Test successful"));
+    }
 }
